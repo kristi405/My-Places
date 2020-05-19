@@ -24,23 +24,25 @@ class MainViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = cafeName[indexPath.row]
-        cell.imageView?.image = UIImage(named: cafeName[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        cell.NameLabel?.text = cafeName[indexPath.row]
+        cell.ImageOfPlaces.image = UIImage(named: cafeName[indexPath.row])
       
         // изменяем размер картинки
         let itemSize = CGSize(width: cell.frame.size.height, height: cell.frame.size.height)
         UIGraphicsBeginImageContextWithOptions(itemSize, false, 0.0)
         let imageRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
-        cell.imageView!.image?.draw(in: imageRect)
-        cell.imageView!.image = UIGraphicsGetImageFromCurrentImageContext()
+        cell.ImageOfPlaces.image?.draw(in: imageRect)
+        cell.ImageOfPlaces.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        cell.imageView!.layer.cornerRadius = cell.frame.size.height / 2
-        cell.imageView!.clipsToBounds = true
+        cell.ImageOfPlaces.layer.cornerRadius = cell.ImageOfPlaces.frame.size.height / 2
+        cell.ImageOfPlaces.clipsToBounds = true
         
         return cell
     }
+    
+    // MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
