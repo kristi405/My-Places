@@ -29,14 +29,21 @@ class MainViewController: UITableViewController {
         cell.imageView?.image = UIImage(named: cafeName[indexPath.row])
       
         // изменяем размер картинки
-        let itemSize = CGSize(width: 60, height: 40)
+        let itemSize = CGSize(width: cell.frame.size.height, height: cell.frame.size.height)
         UIGraphicsBeginImageContextWithOptions(itemSize, false, 0.0)
         let imageRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
         cell.imageView!.image?.draw(in: imageRect)
         cell.imageView!.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        cell.imageView!.layer.cornerRadius = cell.frame.size.height / 2
+        cell.imageView!.clipsToBounds = true
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
     }
     
     
